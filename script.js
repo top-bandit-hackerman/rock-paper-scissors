@@ -10,5 +10,10 @@ function getComputerChoice() {
     return computerChoices[choiseIndex];
 }
 
+function getHumanChoice() {
+    return prompt('Choose rock, paper or scissors: ');
+}
+
 let computerChoice = getComputerChoice();
-console.log(computerChoice);
+let humanChoice = getHumanChoice();
+console.log(humanChoice);
