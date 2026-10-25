@@ -14,9 +14,28 @@ function getHumanChoice() {
     return prompt('Choose rock, paper or scissors: ');
 }
 
+function playRound(computerChoice, humanChoice) {
+    humanChoice = humanChoice.toLowerCase();
+
+    if (humanChoice === computerChoice) {
+        console.log('It is a tie!');
+    } else if ((humanChoice === 'rock' && computerChoice === 'scissors') ||
+        (humanChoice === 'paper' && computerChoice === 'rock') ||
+        (humanChoice === 'scissors' && computerChoice === 'paper')) {
+        console.log(`You win: ${humanChoice} beats ${computerChoice}!`);
+        humanScore++;
+    } else {
+        console.log(`You lose: ${computerChoice} beats ${humanChoice}!`);
+        computerScore++;
+    }
+
+
+}
+
 let computerScore = 0;
 let humanScore = 0;
 
-let computerChoice = getComputerChoice();
-let humanChoice = getHumanChoice();
-console.log(humanChoice);
+const computerChoice = getComputerChoice();
+const humanChoice = getHumanChoice();
+
+playRound(computerChoice, humanChoice);
