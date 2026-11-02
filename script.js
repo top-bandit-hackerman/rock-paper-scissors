@@ -10,10 +10,6 @@ function getComputerChoice() {
     return computerChoices[choiseIndex];
 }
 
-function getHumanChoice() {
-    return prompt('Choose rock, paper or scissors: ');
-}
-
 function playRound(computerChoice, humanChoice) {
     humanChoice = humanChoice.toLowerCase();
 
@@ -35,18 +31,18 @@ function playGame() {
     let computerScore = 0;
     let humanScore = 0;
 
-    for (let roundCount = 0; roundCount < 5; roundCount++) {
-        const computerChoice = getComputerChoice();
-        const humanChoice = getHumanChoice();
-        const roundWinner = playRound(computerChoice, humanChoice);
+    // for (let roundCount = 0; roundCount < 5; roundCount++) {
+    //     const computerChoice = getComputerChoice();
+    //     const humanChoice = getHumanChoice();
+    //     const roundWinner = playRound(computerChoice, humanChoice);
 
-        if (roundWinner !== null) {
-            if (roundWinner === 'human') humanScore++;
-            else computerScore++;
-        }
+    //     if (roundWinner !== null) {
+    //         if (roundWinner === 'human') humanScore++;
+    //         else computerScore++;
+    //     }
 
-        console.log(`Player score: ${humanScore}. Computer score: ${computerScore}`);
-    }
+    //     console.log(`Player score: ${humanScore}. Computer score: ${computerScore}`);
+    // }
 
     if (humanScore === computerScore) {
         console.log(`Tie! Your score: ${humanScore}. Computer score: ${computerScore}`);
@@ -57,5 +53,12 @@ function playGame() {
         console.log(`You lose! Your score: ${humanScore}. Computer score: ${computerScore}`);
     }
 }
+
+const playerChoiceBtns = document.querySelectorAll('btn');
+playerChoiceBtns.forEach((btn) => btn.addEventListener('click', (e) => {
+    const humanChoice = e.target.id;
+    const computerChoice = getComputerChoice();
+    playRound(computerChoice, humanChoice);
+}))
 
 playGame();
