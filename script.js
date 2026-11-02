@@ -10,7 +10,10 @@ function getComputerChoice() {
     return computerChoices[choiseIndex];
 }
 
-function playRound(computerChoice, humanChoice) {
+function playRound(event) {
+    const humanChoice = event.target.id;
+    const computerChoice = getComputerChoice();
+
     humanChoice = humanChoice.toLowerCase();
 
     if (humanChoice === computerChoice) {
@@ -51,11 +54,9 @@ function playGame() {
     }
 }
 
-const playerChoiceBtns = document.querySelectorAll('btn');
+const playerChoiceBtns = document.querySelectorAll('button');
 playerChoiceBtns.forEach((btn) => btn.addEventListener('click', (e) => {
-    const humanChoice = e.target.id;
-    const computerChoice = getComputerChoice();
-    playRound(computerChoice, humanChoice);
+    playRound(e);
 }))
 
 playGame();
