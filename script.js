@@ -16,6 +16,10 @@ function playRound(event) {
 
     humanChoice = humanChoice.toLowerCase();
 
+
+}
+
+function determineWinner(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         return null;
     } else if ((humanChoice === 'rock' && computerChoice === 'scissors') ||
