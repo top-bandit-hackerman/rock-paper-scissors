@@ -31,14 +31,14 @@ function playRound(event) {
     const gameOver = isGameOver(humanScore, computerScore, 5);
     console.log(gameOver);
 
-    showResult(winner, humanScore, computerScore, humanChoice, computerChoice);
+    showCurrentResult(winner, humanScore, computerScore, humanChoice, computerChoice);
 }
 
 function isGameOver(humanScore, computerScore, limit) {
     return Math.max(humanScore, computerScore) == limit;
 }
 
-function showResult(winner, humanScore, computerScore, humanChoice, computerChoice) {
+function showCurrentResult(winner, humanScore, computerScore, humanChoice, computerChoice) {
     const winnerPar = document.querySelector('#winner');
     const humanScoreSpan = document.querySelector('#playerScore');
     const computerScoreSpan = document.querySelector('#computerScore');
