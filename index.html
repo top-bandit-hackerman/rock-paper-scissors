@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <script src="script.js" defer></script>
+    <style>
+        .logDiv {
+            position: fixed;
+            right: 100px;
+            top: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,6 +31,11 @@
             Player: <span id="playerScore">0</span><br>
             Computer: <span id="computerScore">0</span><br>
         </p>
+    </div>
+    <div class="logDiv">
+        GAME LOG
+        <ul id="log">
+        </ul>
     </div>
 </body>
 

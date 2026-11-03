@@ -37,6 +37,7 @@ function playRound(event) {
     }
 
     showStatus(gameOver, winner, humanScore, computerScore, humanChoice, computerChoice, roundCount);
+    updateLog(roundCount, humanChoice, computerChoice, winner, humanScore, computerScore);
 }
 
 function isGameOver(humanScore, computerScore, limit) {
@@ -84,6 +85,15 @@ function showStatus(gameOver, winner, humanScore, computerScore, humanChoice, co
     }
 }
 
+function updateLog(roundCount, humanChoice, computerChoice, winner, humanScore, computerScore) {
+    const logUl = document.querySelector('#log');
+    const li = document.createElement('li');
+    li.textContent = `${roundCount}. Player: ${humanChoice}. Computer: ${computerChoice}  => `;
+    li.textContent += winner === null ? 'tie. ' : `${winner} wins `;
+    li.textContent += `(P:${humanScore} / C:${computerScore})`
+    logUl.appendChild(li);
+}
+
 function determineWinner(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         return null;
@@ -100,5 +110,3 @@ const playerChoiceBtns = document.querySelectorAll('button');
 playerChoiceBtns.forEach((btn) => btn.addEventListener('click', (e) => {
     playRound(e);
 }))
-
-// playGame();
