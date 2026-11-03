@@ -29,11 +29,11 @@ function playRound(event) {
     }
 
     const gameOver = isGameOver(humanScore, computerScore, 5);
-    if (!gameOver) {
-        showCurrentResult(winner, humanScore, computerScore, humanChoice, computerChoice);
-    } else {
+    if (gameOver) {
         disableGameControls();
     }
+
+    showResult(gameOver, winner, humanScore, computerScore, humanChoice, computerChoice);
 }
 
 function isGameOver(humanScore, computerScore, limit) {
@@ -47,30 +47,36 @@ function disableGameControls() {
     })
 }
 
-function showCurrentResult(winner, humanScore, computerScore, humanChoice, computerChoice) {
-    const winnerPar = document.querySelector('#winner');
-    const humanScoreSpan = document.querySelector('#playerScore');
-    const computerScoreSpan = document.querySelector('#computerScore');
+function showResult(gameOver, winner, humanScore, computerScore, humanChoice, computerChoice) {
     const humanChoiceSpan = document.querySelector('#playerChoice');
     const computerChoiceSpan = document.querySelector('#computerChoice');
+    const winnerPar = document.querySelector('#winner');
     const roundCountSpan = document.querySelector('#roundCount');
+    const scoreTypeSpan = document.querySelector('#scoreType');
+    const humanScoreSpan = document.querySelector('#playerScore');
+    const computerScoreSpan = document.querySelector('#computerScore');
 
-    let currentRoundCount = Number(roundCountSpan.textContent);
-    roundCountSpan.textContent = ++currentRoundCount;
+    const scoreType = gameOver ? 'Final' : 'Current';
+    scoreTypeSpan.textContent = scoreType;
+
+    const mode = gameOver ? 'game' : 'round';
 
     humanChoiceSpan.textContent = humanChoice;
     computerChoiceSpan.textContent = computerChoice;
+
+    let currentRoundCount = Number(roundCountSpan.textContent);
+    roundCountSpan.textContent = ++currentRoundCount;
 
     switch (winner) {
         case null:
             winnerPar.textContent = 'No winner, tie!';
             break;
         case 'human':
-            winnerPar.textContent = 'Player wins!';
+            winnerPar.textContent = `Player wins this ${mode}!`;
             humanScoreSpan.textContent = humanScore;
             break;
         case 'computer':
-            winnerPar.textContent = 'Computer wins!';
+            winnerPar.textContent = `Computer wins this ${mode}!`;
             computerScoreSpan.textContent = computerScore;
             break;
     }
