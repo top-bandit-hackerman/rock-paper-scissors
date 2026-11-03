@@ -17,6 +17,9 @@ function playRound(event) {
     let humanScore = Number(document.querySelector('#playerScore').textContent);
     let computerScore = Number(document.querySelector('#computerScore').textContent);
 
+    let roundCount = Number(document.querySelector('#roundCount').textContent);
+    roundCount++;
+
     const winner = determineWinner(humanChoice, computerChoice);
 
     switch (winner) {
@@ -33,7 +36,7 @@ function playRound(event) {
         disableGameControls();
     }
 
-    showStatus(gameOver, winner, humanScore, computerScore, humanChoice, computerChoice);
+    showStatus(gameOver, winner, humanScore, computerScore, humanChoice, computerChoice, roundCount);
 }
 
 function isGameOver(humanScore, computerScore, limit) {
@@ -47,7 +50,7 @@ function disableGameControls() {
     })
 }
 
-function showStatus(gameOver, winner, humanScore, computerScore, humanChoice, computerChoice) {
+function showStatus(gameOver, winner, humanScore, computerScore, humanChoice, computerChoice, roundCount) {
     const humanChoiceSpan = document.querySelector('#playerChoice');
     const computerChoiceSpan = document.querySelector('#computerChoice');
     const winnerPar = document.querySelector('#winner');
@@ -64,8 +67,7 @@ function showStatus(gameOver, winner, humanScore, computerScore, humanChoice, co
     humanChoiceSpan.textContent = humanChoice;
     computerChoiceSpan.textContent = computerChoice;
 
-    let currentRoundCount = Number(roundCountSpan.textContent);
-    roundCountSpan.textContent = ++currentRoundCount;
+    roundCountSpan.textContent = roundCount;
 
     switch (winner) {
         case null:
