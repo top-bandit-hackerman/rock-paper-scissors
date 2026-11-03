@@ -11,37 +11,37 @@ function getComputerChoice() {
 }
 
 function playRound(event) {
-    const humanChoice = event.target.id.toLowerCase();
+    const playerChoice = event.target.id.toLowerCase();
     const computerChoice = getComputerChoice();
 
-    let humanScore = Number(document.querySelector('#playerScore').textContent);
+    let playerScore = Number(document.querySelector('#playerScore').textContent);
     let computerScore = Number(document.querySelector('#computerScore').textContent);
 
     let roundCount = Number(document.querySelector('#roundCount').textContent);
     roundCount++;
 
-    const winner = determineWinner(humanChoice, computerChoice);
+    const winner = determineWinner(playerChoice, computerChoice);
 
     switch (winner) {
         case 'computer':
             computerScore++;
             break;
-        case 'human':
-            humanScore++;
+        case 'player':
+            playerScore++;
             break;
     }
 
-    const gameOver = isGameOver(humanScore, computerScore, 5);
+    const gameOver = isGameOver(playerScore, computerScore, 5);
     if (gameOver) {
         disableGameControls();
     }
 
-    showStatus(gameOver, winner, humanScore, computerScore, humanChoice, computerChoice, roundCount);
-    updateLog(roundCount, humanChoice, computerChoice, winner, humanScore, computerScore);
+    showStatus(gameOver, winner, playerScore, computerScore, playerChoice, computerChoice, roundCount);
+    showLog(roundCount, playerChoice, computerChoice, winner, playerScore, computerScore);
 }
 
-function isGameOver(humanScore, computerScore, limit) {
-    return Math.max(humanScore, computerScore) == limit;
+function isGameOver(playerScore, computerScore, limit) {
+    return Math.max(playerScore, computerScore) == limit;
 }
 
 function disableGameControls() {
@@ -51,13 +51,13 @@ function disableGameControls() {
     })
 }
 
-function showStatus(gameOver, winner, humanScore, computerScore, humanChoice, computerChoice, roundCount) {
-    const humanChoiceSpan = document.querySelector('#playerChoice');
+function showStatus(gameOver, winner, playerScore, computerScore, playerChoice, computerChoice, roundCount) {
+    const playerChoiceSpan = document.querySelector('#playerChoice');
     const computerChoiceSpan = document.querySelector('#computerChoice');
     const winnerPar = document.querySelector('#winner');
     const roundCountSpan = document.querySelector('#roundCount');
     const scoreTypeSpan = document.querySelector('#scoreType');
-    const humanScoreSpan = document.querySelector('#playerScore');
+    const playerScoreSpan = document.querySelector('#playerScore');
     const computerScoreSpan = document.querySelector('#computerScore');
 
     const scoreType = gameOver ? 'Final' : 'Current';
@@ -65,7 +65,7 @@ function showStatus(gameOver, winner, humanScore, computerScore, humanChoice, co
 
     const mode = gameOver ? 'game' : 'round';
 
-    humanChoiceSpan.textContent = humanChoice;
+    playerChoiceSpan.textContent = playerChoice;
     computerChoiceSpan.textContent = computerChoice;
 
     roundCountSpan.textContent = roundCount;
@@ -74,9 +74,9 @@ function showStatus(gameOver, winner, humanScore, computerScore, humanChoice, co
         case null:
             winnerPar.textContent = 'No winner, tie!';
             break;
-        case 'human':
+        case 'player':
             winnerPar.textContent = `Player wins this ${mode}!`;
-            humanScoreSpan.textContent = humanScore;
+            playerScoreSpan.textContent = playerScore;
             break;
         case 'computer':
             winnerPar.textContent = `Computer wins this ${mode}!`;
@@ -85,22 +85,22 @@ function showStatus(gameOver, winner, humanScore, computerScore, humanChoice, co
     }
 }
 
-function updateLog(roundCount, humanChoice, computerChoice, winner, humanScore, computerScore) {
+function showLog(roundCount, playerChoice, computerChoice, winner, playerScore, computerScore) {
     const logUl = document.querySelector('#log');
     const li = document.createElement('li');
-    li.textContent = `${roundCount}. Player: ${humanChoice}. Computer: ${computerChoice}  => `;
+    li.textContent = `${roundCount}. Player: ${playerChoice}. Computer: ${computerChoice}  => `;
     li.textContent += winner === null ? 'tie. ' : `${winner} wins `;
-    li.textContent += `(P:${humanScore} / C:${computerScore})`
+    li.textContent += `(P:${playerScore} / C:${computerScore})`
     logUl.appendChild(li);
 }
 
-function determineWinner(humanChoice, computerChoice) {
-    if (humanChoice === computerChoice) {
+function determineWinner(playerChoice, computerChoice) {
+    if (playerChoice === computerChoice) {
         return null;
-    } else if ((humanChoice === 'rock' && computerChoice === 'scissors') ||
-        (humanChoice === 'paper' && computerChoice === 'rock') ||
-        (humanChoice === 'scissors' && computerChoice === 'paper')) {
-        return 'human';
+    } else if ((playerChoice === 'rock' && computerChoice === 'scissors') ||
+        (playerChoice === 'paper' && computerChoice === 'rock') ||
+        (playerChoice === 'scissors' && computerChoice === 'paper')) {
+        return 'player';
     } else {
         return 'computer';
     }
