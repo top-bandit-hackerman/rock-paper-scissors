@@ -28,7 +28,14 @@ function playRound(event) {
             break;
     }
 
+    const gameOver = isGameOver(humanScore, computerScore, 5);
+    console.log(gameOver);
+
     showResult(winner, humanScore, computerScore, humanChoice, computerChoice);
+}
+
+function isGameOver(humanScore, computerScore, limit) {
+    return Math.max(humanScore, computerScore) == limit;
 }
 
 function showResult(winner, humanScore, computerScore, humanChoice, computerChoice) {
