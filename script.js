@@ -33,7 +33,7 @@ function playRound(event) {
         disableGameControls();
     }
 
-    showResult(gameOver, winner, humanScore, computerScore, humanChoice, computerChoice);
+    showStatus(gameOver, winner, humanScore, computerScore, humanChoice, computerChoice);
 }
 
 function isGameOver(humanScore, computerScore, limit) {
@@ -47,7 +47,7 @@ function disableGameControls() {
     })
 }
 
-function showResult(gameOver, winner, humanScore, computerScore, humanChoice, computerChoice) {
+function showStatus(gameOver, winner, humanScore, computerScore, humanChoice, computerChoice) {
     const humanChoiceSpan = document.querySelector('#playerChoice');
     const computerChoiceSpan = document.querySelector('#computerChoice');
     const winnerPar = document.querySelector('#winner');
