@@ -28,13 +28,18 @@ function playRound(event) {
             break;
     }
 
-    showResult(winner, humanScore, computerScore);
+    showResult(winner, humanScore, computerScore, humanChoice, computerChoice);
 }
 
-function showResult(winner, humanScore, computerScore) {
+function showResult(winner, humanScore, computerScore, humanChoice, computerChoice) {
     const winnerPar = document.querySelector('#winner');
     const humanScoreSpan = document.querySelector('#playerScore');
     const computerScoreSpan = document.querySelector('#computerScore');
+    const humanChoiceSpan = document.querySelector('#playerChoice');
+    const computerChoiceSpan = document.querySelector('#computerChoice');
+
+    humanChoiceSpan.textContent = humanChoice;
+    computerChoiceSpan.textContent = computerChoice;
 
     switch (winner) {
         case null:
