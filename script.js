@@ -34,10 +34,11 @@ function playRound(event) {
     const gameOver = isGameOver(playerScore, computerScore, 5);
     if (gameOver) {
         disableGameControls();
+        document.querySelector('#reloadBtn').style.display = 'block';
     }
 
     showStatus(gameOver, winner, playerScore, computerScore, playerChoice, computerChoice, roundCount);
-    showLog(roundCount, playerChoice, computerChoice, winner, playerScore, computerScore);
+    showLog(gameOver, roundCount, playerChoice, computerChoice, winner, playerScore, computerScore);
 }
 
 function isGameOver(playerScore, computerScore, limit) {
@@ -45,7 +46,7 @@ function isGameOver(playerScore, computerScore, limit) {
 }
 
 function disableGameControls() {
-    const playerChoiceBtns = document.querySelectorAll('button');
+    const playerChoiceBtns = document.querySelectorAll('.controls');
     playerChoiceBtns.forEach((btn) => {
         btn.disabled = true;
     })
@@ -85,13 +86,20 @@ function showStatus(gameOver, winner, playerScore, computerScore, playerChoice, 
     }
 }
 
-function showLog(roundCount, playerChoice, computerChoice, winner, playerScore, computerScore) {
+function showLog(gameOver, roundCount, playerChoice, computerChoice, winner, playerScore, computerScore) {
     const logUl = document.querySelector('#log');
     const li = document.createElement('li');
     li.textContent = `${roundCount}. Player: ${playerChoice}. Computer: ${computerChoice}  => `;
     li.textContent += winner === null ? 'tie. ' : `${winner} wins `;
-    li.textContent += `(P:${playerScore} / C:${computerScore})`
+    const scoreStr = `(P:${playerScore} / C:${computerScore})`;
+    li.textContent += scoreStr;
     logUl.appendChild(li);
+
+    if (gameOver) {
+        const gameOverMsg = document.createElement('li');
+        gameOverMsg.textContent = `Game over. ${winner[0].toUpperCase() + winner.slice(1)} wins ${scoreStr}`;
+        logUl.appendChild(gameOverMsg);
+    }
 }
 
 function determineWinner(playerChoice, computerChoice) {
@@ -106,7 +114,13 @@ function determineWinner(playerChoice, computerChoice) {
     }
 }
 
-const playerChoiceBtns = document.querySelectorAll('button');
-playerChoiceBtns.forEach((btn) => btn.addEventListener('click', (e) => {
+const controls = document.querySelectorAll('.controls');
+const reloadBtn = document.querySelector('#reloadBtn');
+
+controls.forEach((btn) => btn.addEventListener('click', (e) => {
     playRound(e);
 }))
+
+reloadBtn.addEventListener('click', () => {
+    document.location.reload();
+})

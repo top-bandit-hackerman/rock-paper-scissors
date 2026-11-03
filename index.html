@@ -12,13 +12,21 @@
             right: 100px;
             top: 10px;
         }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .reloadBtn {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
+    <button id="rock" class="controls">Rock</button>
+    <button id="paper" class="controls">Paper</button>
+    <button id="scissors" class="controls">Scissors</button>
     <div class="result">
         <p id="choices">
             Player chose: <span id="playerChoice"></span><br>
@@ -31,6 +39,7 @@
             Player: <span id="playerScore">0</span><br>
             Computer: <span id="computerScore">0</span><br>
         </p>
+        <button id="reloadBtn" class="reloadBtn">Play Again</button>
     </div>
     <div class="logDiv">
         GAME LOG
