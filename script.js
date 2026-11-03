@@ -44,6 +44,10 @@ function showResult(winner, humanScore, computerScore, humanChoice, computerChoi
     const computerScoreSpan = document.querySelector('#computerScore');
     const humanChoiceSpan = document.querySelector('#playerChoice');
     const computerChoiceSpan = document.querySelector('#computerChoice');
+    const roundCountSpan = document.querySelector('#roundCount');
+
+    let currentRoundCount = Number(roundCountSpan.textContent);
+    roundCountSpan.textContent = ++currentRoundCount;
 
     humanChoiceSpan.textContent = humanChoice;
     computerChoiceSpan.textContent = computerChoice;
