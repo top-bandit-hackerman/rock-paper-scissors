@@ -29,13 +29,22 @@ function playRound(event) {
     }
 
     const gameOver = isGameOver(humanScore, computerScore, 5);
-    console.log(gameOver);
-
-    showCurrentResult(winner, humanScore, computerScore, humanChoice, computerChoice);
+    if (!gameOver) {
+        showCurrentResult(winner, humanScore, computerScore, humanChoice, computerChoice);
+    } else {
+        disableGameControls();
+    }
 }
 
 function isGameOver(humanScore, computerScore, limit) {
     return Math.max(humanScore, computerScore) == limit;
+}
+
+function disableGameControls() {
+    const playerChoiceBtns = document.querySelectorAll('button');
+    playerChoiceBtns.forEach((btn) => {
+        btn.disabled = true;
+    })
 }
 
 function showCurrentResult(winner, humanScore, computerScore, humanChoice, computerChoice) {
